@@ -1,31 +1,22 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-
+import styles from "../Searchbar/Searchbar.module.css"
 
 export class Searchbar extends Component {
-    state = {
-        inputValue: "",
-    }
-   
-    handleSubmit = evt => {
-        evt.preventDefault();
-        const form = evt.currentTarget;
-        const login = form.elements.login.value;
-        console.log(login);
-       
-   }
 
     render() {
+        const {handleSubmit, handleChange ,inputValue} = this.props
     return (
-        <header className="searchbar">
-            <form className="form" onSubmit={this.handleSubmit}>
-                <button type="submit" className="button">
-                    <span className="button-label">Search</span>
+        <header className={styles.searchbar}>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <button type="submit" className={styles.button}>
+                    <span className={styles.buttonlabel}>Search</span>
                 </button>
                 <input
-                    className="input"
+                    className={styles.input}
                     type="text"
-                    name="login"
+                    value={inputValue}
+                    onChange={handleChange}
                     autoComplete="off"
                     autoFocus
                     placeholder="Search images and photos"
@@ -38,3 +29,9 @@ export class Searchbar extends Component {
 }
 
 export default Searchbar
+
+Searchbar.propTypes = {
+    handleSubmit: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    inputValue: PropTypes.string.isRequired
+};
